@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="../open-listen-port/index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-database/index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="../sendbroadcast-information-leak/index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="../local-dos/index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="../android-webview/index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">SSL本地库中间人攻击漏洞</a></h1>
+            <div class="post-content">
+            <ul>
+<li>漏洞类型：中间人攻击</li>
+<li>威胁等级：中</li>
+<li>影响版本：Android系统所有版本</li>
+</ul>
+
+<h4 id="漏洞详情">漏洞详情</h4>
+
+<p>在密码学和计算机安全领域中，中间人攻击（<code>Man-in-the-middle attack</code>，缩写：<code>MITM</code>）是指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容[<a href="https://zh.wikipedia.org/zh/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB">1</a>]。</p>
+
+<h4 id="测试方法">测试方法</h4>
+
+<p>近几年来，能够导致中间人攻击的比较严重openSSL的几处漏洞为：</p>
+
+<ul>
+<li>CVE-2015-1793（交叉证书验证绕过漏洞）</li>
+<li>CVE-2015-0204</li>
+<li>CVE-2015-4000（SSL Logjam漏洞）</li>
+<li>CVE-2014-3566（SSL 贵宾犬漏洞）</li>
+<li>CVE-2014-0160（SSL 心脏滴血漏洞）</li>
+<li>CVE-2014-0224（SSL CCS injected漏洞）</li>
+</ul>
+
+<p>查看openssl so库的版本</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">strings openssl.so <span class="p">|</span> grep <span class="s2">&quot;SSLv3 part of OpenSSL &quot;</span>
+</code></pre></div>
+<p>以上漏洞影响的版本和修复的版本[<a href="https://www.openssl.org/news/vulnerabilities.html">2</a>]：</p>
+
+<h5 id="cve-2015-1793（交叉证书骜证绕过漏洞）">CVE-2015-1793（交叉证书验证绕过漏洞）</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.2d <span class="o">(</span>Affected 1.0.2c, 1.0.2b<span class="o">)</span>
+Fixed in OpenSSL 1.0.1p <span class="o">(</span>Affected 1.0.1o, 1.0.1n<span class="o">)</span>
+</code></pre></div>
+<h5 id="cve-2015-0204">CVE-2015-0204</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.1k <span class="o">(</span>Affected 1.0.1j, 1.0.1i, 1.0.1h, 1.0.1g, 1.0.1f, 1.0.1e, 1.0.1d, 1.0.1c, 1.0.1b, 1.0.1a, 1.0.1<span class="o">)</span>
+Fixed in OpenSSL 1.0.0p <span class="o">(</span>Affected 1.0.0o, 1.0.0n, 1.0.0m, 1.0.0l, 1.0.0k, 1.0.0j, 1.0.0i, 1.0.0g, 1.0.0f, 1.0.0e, 1.0.0d, 1.0.0c, 1.0.0b, 1.0.0a, 1.0.0<span class="o">)</span>
+Fixed in OpenSSL 0.9.8zd <span class="o">(</span>Affected 0.9.8zc, 0.9.8zb, 0.9.8za, 0.9.8y, 0.9.8x, 0.9.8w, 0.9.8v, 0.9.8u, 0.9.8t, 0.9.8s, 0.9.8r, 0.9.8q, 0.9.8p, 0.9.8o, 0.9.8n, 0.9.8m, 0.9.8l, 0.9.8k, 0.9.8j, 0.9.8i, 0.9.8h, 0.9.8g, 0.9.8f, 0.9.8e, 0.9.8d, 0.9.8c, 0.9.8b, 0.9.8a, 0.9.8<span class="o">)</span>
+</code></pre></div>
+<h5 id="cve-2015-4000（ssl-logjam漏洞）">CVE-2015-4000（SSL Logjam漏洞）</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.2b <span class="o">(</span>Affected 1.0.2a, 1.0.2<span class="o">)</span>
+Fixed in OpenSSL 1.0.1n <span class="o">(</span>Affected 1.0.1m, 1.0.1l, 1.0.1k, 1.0.1j, 1.0.1i, 1.0.1h, 1.0.1g, 1.0.1f, 1.0.1e, 1.0.1d, 1.0.1c, 1.0.1b, 1.0.1a, 1.0.1<span class="o">)</span>
+</code></pre></div>
+<h5 id="cve-2014-3566（ssl-贵宾皬漏洞）">CVE-2014-3566（SSL 贵宾犬漏洞）</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.1j <span class="o">(</span>Affected 1.0.1i, 1.0.1h, 1.0.1g, 1.0.1f, 1.0.1e, 1.0.1d, 1.0.1c, 1.0.1b, 1.0.1a, 1.0.1<span class="o">)</span>
+Fixed in OpenSSL 1.0.0o <span class="o">(</span>Affected 1.0.0n, 1.0.0m, 1.0.0l, 1.0.0k, 1.0.0j, 1.0.0i, 1.0.0g, 1.0.0f, 1.0.0e, 1.0.0d, 1.0.0c, 1.0.0b, 1.0.0a, 1.0.0<span class="o">)</span>
+Fixed in OpenSSL 0.9.8zc <span class="o">(</span>Affected 0.9.8zb, 0.9.8za, 0.9.8y, 0.9.8x, 0.9.8w, 0.9.8v, 0.9.8u, 0.9.8t, 0.9.8s, 0.9.8r, 0.9.8q, 0.9.8p, 0.9.8o, 0.9.8n, 0.9.8m, 0.9.8l, 0.9.8k, 0.9.8j, 0.9.8i, 0.9.8h, 0.9.8g, 0.9.8f, 0.9.8e, 0.9.8d, 0.9.8c, 0.9.8b, 0.9.8a, 0.9.8<span class="o">)</span>
+</code></pre></div>
+<h5 id="cve-2014-0160（ssl-心脏滴血漏洞）">CVE-2014-0160（SSL 心脏滴血漏洞）</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.1g <span class="o">(</span>Affected 1.0.1f, 1.0.1e, 1.0.1d, 1.0.1c, 1.0.1b, 1.0.1a, 1.0.1<span class="o">)</span>
+</code></pre></div>
+<h5 id="cve-2014-0224（ssl-ccs-injected漏洞）">CVE-2014-0224（SSL CCS injected漏洞）</h5>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Fixed in OpenSSL 1.0.1h <span class="o">(</span>Affected 1.0.1g, 1.0.1f, 1.0.1e, 1.0.1d, 1.0.1c, 1.0.1b, 1.0.1a, 1.0.1<span class="o">)</span>
+Fixed in OpenSSL 1.0.0m <span class="o">(</span>Affected 1.0.0l, 1.0.0k, 1.0.0j, 1.0.0i, 1.0.0g, 1.0.0f, 1.0.0e, 1.0.0d, 1.0.0c, 1.0.0b, 1.0.0a, 1.0.0<span class="o">)</span>
+Fixed in OpenSSL 0.9.8za <span class="o">(</span>Affected 0.9.8y, 0.9.8x, 0.9.8w, 0.9.8v, 0.9.8u, 0.9.8t, 0.9.8s, 0.9.8r, 0.9.8q, 0.9.8p, 0.9.8o, 0.9.8n, 0.9.8m, 0.9.8l, 0.9.8k, 0.9.8j, 0.9.8i, 0.9.8h, 0.9.8g, 0.9.8f, 0.9.8e, 0.9.8d, 0.9.8c, 0.9.8b, 0.9.8a, 0.9.8<span class="o">)</span>
+</code></pre></div>
+<h4 id="解决方案">解决方案</h4>
+
+<p>移除受漏洞影响的<code>openssl</code>库，使用最新版本的<code>openssl</code>。</p>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1]: <a href="https://zh.wikipedia.org/zh/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB">https://zh.wikipedia.org/zh/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB</a></p>
+
+<p>[2]: <a href="https://www.openssl.org/news/vulnerabilities.html">https://www.openssl.org/news/vulnerabilities.html</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

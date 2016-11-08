@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="../open-listen-port/index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-database/index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="../native-ssl-middle-man/index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="../local-dos/index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="../android-webview/index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">发送广播信息泄漏风险</a></h1>
+            <div class="post-content">
+            <ul>
+<li>漏洞类型：信息泄漏</li>
+<li>威胁等级：低</li>
+</ul>
+
+<h4 id="漏洞描述">漏洞描述</h4>
+
+<p><code>Broadcast</code>是Android四大组件之一，通过发送广播可以通知给所有<code>receiver</code>发送的<code>intent</code>[<a href="http://developer.android.com/reference/android/content/BroadcastReceiver.html">1</a>]，在广播的使用不合理的时候，例如权限滥用等，攻击者可以伪造广播、更改广播等对APP进行攻击，获取敏感信息等，乌云平台对该组件的安全问题有详细的描述[<a href="http://drops.wooyun.org/tips/4393">2</a>]。</p>
+
+<h4 id="广播类型">广播类型</h4>
+
+<p><strong>系统广播</strong>：像开机启动、接收到短信、电池电量低这类事件发生的时候系统都会发出特定的广播去通知应用。</p>
+
+<p><strong>自定义广播</strong>：不同于系统广播事件，开发者按照自己需求定义的广播事件。</p>
+
+<ul>
+<li>Normal Broadcast</li>
+</ul>
+
+<p><code>SendBroadcast</code>，能够异步的发送广播消息，接收该广播的<code>receiver</code>没有顺序限制。</p>
+
+<ul>
+<li>Ordered Broadcast</li>
+</ul>
+
+<p><code>Ordered Broadcast</code>-有序广播，<code>Normal Broadcast</code>-普通广播，区别是有序广播发出后<code>receiver</code>按照一定的权限顺序接收这个广播，并且前面的<code>receiver</code>可以对广播的内容进行修改，修改的结果被后面<code>receiver</code>接收，优先级高的<code>receiver</code>还可以结束这个广播，后面优先级低的<code>receiver</code>不会再收到广播。<code>Normal Broadcast</code>发出后，<code>receiver</code>接收广播时不存在先后顺序，也不能终止广播。</p>
+
+<ul>
+<li>Sticky Broadcast</li>
+</ul>
+
+<p><code>sticky broadcast</code>在发送并经过AMS(ActivityManagerService)分发给对应的<code>receiver</code>后，broadcast不会被丢弃，会保存在AMS中。当有新的需要动态注册的receiver请求AMS注册时，如果该<code>receiver</code>能够接收这个<code>broadcast</code>，那么AMS会将在receiver注册成功之后，立即向<code>receiver</code>发送这个<code>broadcast</code>。</p>
+
+<p><code>sendStickyBroadcast()</code>顾名思义是发送粘性的广播，需要申请权限<code>android.Manifest.permission.BROADCAST_STICKY</code>,<code>sticky broadcast</code>的特点是Intent广播事件结束会一直保留。</p>
+
+<ul>
+<li>Local Broadcast</li>
+</ul>
+
+<p>只能在同一进程发送的广播类型，同一APP的其他进程以及其他APP的进程无法接收</p>
+
+<h4 id="测试方法">测试方法</h4>
+
+<p>以下为发送广播的API，其中一部分API有permission的参数，一部分不能设置permission。漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="o">...</span>
+    <span class="n">Intent</span> <span class="n">i</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">(</span><span class="s">&quot;com.hmkcode.android.USER_ACTION&quot;</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendStickyBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendStickyBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendStickyOrderedBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="kc">null</span><span class="o">,</span><span class="kc">null</span><span class="o">);</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">sendStickyOrderedBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+    <span class="o">...</span>
+</code></pre></div>
+<h4 id="解决方案">解决方案</h4>
+
+<p>1.通常采用的安全方式有setPackage设置包名 </p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">intent</span><span class="o">.</span><span class="na">setAction</span><span class="o">(</span><span class="s">&quot;allow.package.recv.action&quot;</span><span class="o">);</span>
+<span class="n">intent</span><span class="o">.</span><span class="na">setPackage</span><span class="o">(</span><span class="s">&quot;allow.package.recv.packagename&quot;</span><span class="o">);</span>
+<span class="n">sendBroadcast</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</code></pre></div>
+<p>如果指定特殊的<code>receiver</code>接收可以指定<code>component</code>：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">intent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="n">newComponentName</span><span class="o">(</span><span class="s">&quot;allow.package.recv.packagename&quot;</span><span class="o">,</span> <span class="s">&quot;allow.package.recv.classname&quot;</span><span class="o">));</span>
+<span class="n">sendBroadcast</span><span class="o">(</span><span class="n">intent</span><span class="o">);</span>
+</code></pre></div>
+<p>对于<code>sendBroadcastAsUser(i,null)</code>的使用处理方式同上。</p>
+
+<p>2.广播如果是APP内部使用，使用LocalBroadcastManager，使广播的Intent仅在该进程内部，而不会让同一APP的其他进程或者其他APP接收到。</p>
+
+<p>3.设置权限</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">sendBroadcast</span><span class="o">(</span><span class="n">intent</span><span class="o">,</span><span class="s">&quot;broadcast.permission&quot;</span><span class="o">);</span>
+<span class="k">this</span><span class="o">.</span><span class="na">sendBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span><span class="s">&quot;broadcast.permission&quot;</span><span class="o">);</span>
+<span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcastAsUser</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">&quot;broadcast.permission&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+<span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">&quot;broadcast.permission&quot;</span><span class="o">);</span>
+<span class="k">this</span><span class="o">.</span><span class="na">sendOrderedBroadcast</span><span class="o">(</span><span class="n">i</span><span class="o">,</span> <span class="s">&quot;broadcast.permission&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+</code></pre></div>
+<p>同时在AndroidManifest.xml中如下配置：</p>
+<div class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;broadcast.permission&quot;</span> <span class="nt">/&gt;</span> 
+<span class="nt">&lt;permission</span> <span class="na">android:name=</span><span class="s">&quot;broadcast.permission&quot;</span> <span class="na">android:protectionLevel=</span><span class="s">&quot;signature&quot;</span> <span class="nt">/&gt;</span> 
+</code></pre></div>
+<p><code>android:protectionLevel</code>为<code>signature</code>，防止其他APP能够非常容易的窃取权限。</p>
+
+<p>4.避免使用 <code>sendStickyBroadcast</code> <code>sendStickyBroadcastAsUser</code>  <code>sendStickyOrderedBroadcast</code> <code>sendStickyOrderedBroadcastAsUser</code>这类API，Android SDK文档中也明确说明了存在安全问题， 如果必须使用sticky broadcast，广播中不应包含敏感信息。</p>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1] <a href="http://developer.android.com/reference/android/content/BroadcastReceiver.html">http://developer.android.com/reference/android/content/BroadcastReceiver.html</a></p>
+
+<p>[2] <a href="http://drops.wooyun.org/tips/4393">http://drops.wooyun.org/tips/4393</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

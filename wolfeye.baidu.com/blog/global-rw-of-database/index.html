@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="../open-listen-port/index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="../sendbroadcast-information-leak/index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="../native-ssl-middle-man/index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="../local-dos/index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="../android-webview/index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">数据库全局读写漏洞</a></h1>
+            <div class="post-content">
+            <ul>
+<li>威胁等级：中</li>
+<li>影响版本：Android系统所有版本</li>
+</ul>
+
+<h4 id="漏洞描述">漏洞描述</h4>
+
+<p>APP在创建数据库[<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html">1</a>]时，将数据库设置了全局的可读权限，攻击者恶意读取数据库内容，获取敏感信息。在设置数据库属性时如果设置全局可写，攻击者可能会篡改、伪造内容，可以能会进行诈骗等行为，造成用户财产损失</p>
+
+<h4 id="测试方法">测试方法</h4>
+
+<p>以下为数据库全局读写的一种实现方式，漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="o">...</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">SQLiteDatabase</span> <span class="n">rdb</span> <span class="o">=</span> <span class="n">openOrCreateDatabase</span><span class="o">(</span><span class="s">&quot;all_r_db&quot;</span><span class="o">,</span>
+                    <span class="n">Context</span><span class="o">.</span><span class="na">MODE_WORLD_READABLE</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="n">SQLiteDatabase</span> <span class="n">wdb</span> <span class="o">=</span> <span class="n">openOrCreateDatabase</span><span class="o">(</span><span class="s">&quot;all_w_db&quot;</span><span class="o">,</span>
+                    <span class="n">Context</span><span class="o">.</span><span class="na">MODE_WORLD_WRITEABLE</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">SQLiteException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>创建应用内部存储文件时，调用了<code>openOrCreateDatabase</code>，并将访问权限设置为<code>MODE_WORLD_READABLE</code>或者<code>MODE_WORLD_WRITEABLE</code>，若设备被root也可进行读写</p>
+
+<h4 id="解决方案">解决方案</h4>
+
+<ul>
+<li>1.用<code>MODE_PRIVATE</code>模式创建数据库</li>
+<li>2.使用sqlcipher等工具加密数据库</li>
+<li>3.避免在数据库中存储明文和敏感信息</li>
+</ul>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1] <a href="http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html">http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html</a></p>
+
+<p>[2] <a href="http://www.wooyun.org/bugs/wooyun-2010-08187">http://www.wooyun.org/bugs/wooyun-2010-08187</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

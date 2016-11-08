@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="../open-listen-port/index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-database/index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="../sendbroadcast-information-leak/index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="../native-ssl-middle-man/index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="../local-dos/index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">WebView组件系统隐藏接口未移除漏洞</a></h1>
+            <div class="post-content">
+            <ul>
+<li>漏洞类型：远程执行</li>
+<li>威胁等级：中</li>
+<li>漏洞来源：Joshua J. Drak</li>
+<li>影响版本： Android 4.3 Android 4.2 Android 4.1 Android 4.0</li>
+</ul>
+
+<h4 id="漏洞描述">漏洞描述</h4>
+
+<p>在2014年二月，安全研究员Joshua J. Drak发现并公布了一个在Android WebView中可以被利用的<code>Javascript bridge “searchBoxJavaBridge_”</code>[<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1939">1</a>][<a href="http://openwall.com/lists/oss-security/2014/02/11/2">2</a>]， 在Android4.0 ~ Android4.3.1版本中，当<code>BrowserFrame</code>初始化的时候，会创建一个 <code>android.webkit.SearchBoxImpl</code>[<a href="https://android.googlesource.com/platform/frameworks/base/+/jb-release/core/java/android/webkit/SearchBoxImpl.java">3</a>] 实例，并将此实例使用<code>searchBoxJavaBridge_</code>这个名字添加为<code>JavaScript Object</code>，而攻击者可以利用这个实例执行远程代码。而此漏洞的根源是CVE-2012-6636这个漏洞[<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6636">4</a>]。</p>
+
+<p><img src="../images/webview_CVE-2014-1939/webview_0.png" alt="webview_0" title="webview_0"></p>
+
+<p style="text-align:center">图1. BrowserFrame.java 代码片段</p>
+
+<p><img src="../images/webview_CVE-2014-1939/webview_1.png" alt="webview_1" title="webview_1"></p>
+
+<p style="text-align:center">图2. SearchBoxImpl.java 代码片段</p>
+
+<h3 id="测试方法">测试方法</h3>
+
+<p>在APP中加载”检测页面“[<a href="http://drops.wooyun.org/webview.html">5</a>]，如果存在此漏洞则会有下图一样的检测结果。</p>
+
+<p><img src="../images/webview_CVE-2014-1939/webview_2.png" alt="webview_2" title="webview_2"></p>
+
+<p style="text-align:center">图3. 检测结果页面</p>
+
+<h4 id="解决方案">解决方案</h4>
+
+<p>从Android 4.4 版本开始，Google使用Chromium的项目的实现替换了之前单纯基于WebKit的WebView[<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6636">4</a>]，此问题从Android4.4 版本开始不存在。</p>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1] <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1939">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-1939</a></p>
+
+<p>[2] <a href="http://openwall.com/lists/oss-security/2014/02/11/2">http://openwall.com/lists/oss-security/2014/02/11/2</a></p>
+
+<p>[3] <a href="https://android.googlesource.com/platform/frameworks/base/+/jb-release/core/java/android/webkit/SearchBoxImpl.java">https://android.googlesource.com/platform/frameworks/base/+/jb-release/core/java/android/webkit/SearchBoxImpl.java</a></p>
+
+<p>[4] <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6636">http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-6636</a></p>
+
+<p>[5] <a href="http://drops.wooyun.org/webview.html">http://drops.wooyun.org/webview.html</a></p>
+
+<p>[6] <a href="http://blog.chromium.org/2013/11/introducing-chromium-powered-android.html">http://blog.chromium.org/2013/11/introducing-chromium-powered-android.html</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="../open-listen-port/index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-database/index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="../sendbroadcast-information-leak/index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="../native-ssl-middle-man/index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="../android-webview/index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">Android 本地拒绝服务漏洞</a></h1>
+            <div class="post-content">
+            <ul>
+<li>漏洞类型：本地拒绝服务</li>
+<li>威胁等级：中</li>
+<li>影响版本：Android系统所有版本</li>
+</ul>
+
+<h4 id="漏洞描述">漏洞描述</h4>
+
+<p><code>Android</code>系统提供了<code>Activity</code>、<code>Service</code>和<code>Broadcast Receiver</code>等组件，并提供了<code>Intent</code>机制来协助应用间的交互与通讯，<code>Intent</code>负责对应用中一次操作的动作、动作涉及数据、附加数据进行描述，<code>Android</code>系统则根据此<code>Intent</code>的描述，负责找到对应的组件，将Intent传递给调用的组件，并完成组件的调用[<a href="http://developer.android.com/guide/components/index.html">1</a>]。Android应用本地拒绝服务漏洞源于程序没有对<code>Intent.getXXXExtra()</code>获取的异常或者畸形数据处理时没有进行异常捕获，从而导致攻击者可通过向受害者应用发送此类空数据、异常或者畸形数据来达到使该应用崩溃的目的，简单的说就是攻击者通过<code>intent</code>发送空数据、异常或畸形数据给受害者应用，导致其崩溃。</p>
+
+<p>近期，两位<code>0xr0ot</code>和<code>Xbalien</code>安全研究人员发现了一处通用的本地拒绝服务漏洞。该通用型本地拒绝服务可以造成大面积的<code>app</code>拒绝服务。通用型本地拒绝服务漏洞，主要源于攻击者向<code>Intent</code>中传入其自定义的序列化类对象，当调用组件收到此<code>Extra</code>序列化类对象时，无法找到此序列化类对象的类定义，因此发生类未定义的异常而导致应用崩溃。本地拒绝服务漏洞不仅可以导致安全防护等应用的防护功能被绕过或失效（如杀毒应用、安全卫士、防盗锁屏等），而且也可被竞争方应用利用来攻击，使得自己的应用崩溃，造成不同程度的经济利益损失。</p>
+
+<h4 id="测试方法">测试方法</h4>
+
+<h5 id="1-通用型拒绝服嚡漏洞">1.通用型拒绝服务漏洞</h5>
+
+<p>漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">intent</span><span class="o">.</span><span class="na">getSerializableExtra</span><span class="o">(</span><span class="s">&quot;serializable_object&quot;</span><span class="o">);</span>
+</code></pre></div>
+<p>使用了<code>getXXXExtra</code> 形式的函数获取<code>extra</code>数据，如果该类不存在则会抛出异常。</p>
+
+<p>测试代码：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="n">Intent</span> <span class="n">localIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="n">packageName</span><span class="o">,</span> <span class="n">className</span><span class="o">));</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="s">&quot;serializable_object&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="nf">MalformedObject</span><span class="o">());</span>
+    <span class="n">startActivity</span><span class="o">(</span><span class="n">localIntent</span><span class="o">);</span>
+</code></pre></div>
+<h5 id="2-空action异常">2.空Action异常</h5>
+
+<p>漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">Intent</span> <span class="n">intent</span> <span class="o">=</span> <span class="n">getIntent</span><span class="o">();</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">intent</span><span class="o">.</span><span class="na">getAction</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">&quot;android.intent.action.refuse.nullaction&quot;</span><span class="o">))</span> <span class="o">{</span>
+    <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&quot;TAG&quot;</span><span class="o">,</span> <span class="s">&quot;Test for Android Refuse Service Bug&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>使用了<code>getAction</code>获取<code>action</code>名称，使用上述代码形式，<code>getAction</code>的返回值进行判断。</p>
+
+<p>测试代码：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="n">Intent</span> <span class="n">localIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="n">packageName</span><span class="o">,</span> <span class="n">className</span><span class="o">));</span>
+    <span class="n">startActivity</span><span class="o">(</span><span class="n">localIntent</span><span class="o">);</span>
+</code></pre></div>
+<p>或者使用<code>adb shell am</code>命令：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> adb shell am start -n packageName/componentName
+</code></pre></div>
+<h5 id="3-类型强转异常">3.类型强转异常</h5>
+
+<p>漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="n">String</span> <span class="n">classCast</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span><span class="n">intent</span><span class="o">.</span><span class="na">getSerializableExtra</span><span class="o">(</span><span class="s">&quot;serializable_object&quot;</span><span class="o">);</span>
+</code></pre></div>
+<p>获取Intent的数据时，直接进行强制类型转换。</p>
+
+<p>测试代码：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="n">Intent</span> <span class="n">localIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="n">packageName</span><span class="o">,</span> <span class="n">className</span><span class="o">));</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">putExtra</span><span class="o">(</span><span class="err">&#39;</span><span class="n">serializable_object</span><span class="err">&#39;</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="n">startActivity</span><span class="o">(</span><span class="n">localIntent</span><span class="o">);</span>
+</code></pre></div>
+<h5 id="4-数组趚畜异常">4.数组越界异常</h5>
+
+<p>漏洞代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java"><span class="kt">int</span> <span class="o">[]</span> <span class="n">intArray_</span>  <span class="o">=</span> <span class="n">intent</span><span class="o">.</span><span class="na">getIntArrayExtra</span><span class="o">(</span><span class="s">&quot;interger_array&quot;</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">intArray_</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+
+                <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&quot;interger_array&quot;</span><span class="o">,</span> <span class="s">&quot;extra&quot;</span><span class="o">+</span><span class="n">intArray_</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">else</span>
+        <span class="o">{</span>
+             <span class="n">Log</span><span class="o">.</span><span class="na">d</span><span class="o">(</span><span class="s">&quot;interger_array&quot;</span><span class="o">,</span> <span class="s">&quot;extra is null&quot;</span><span class="o">);</span>
+        <span class="o">}</span>
+</code></pre></div>
+<p>枚举<code>getIntArrayExtra</code>返回的数据时，没有判断数组的边界，按照理想的数组大小进行了遍历。</p>
+
+<p>测试代码：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="n">Intent</span> <span class="n">localIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="n">packageName</span><span class="o">,</span> <span class="n">className</span><span class="o">));</span>
+    <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;();</span>
+    <span class="n">array</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">putIntegerArrayListExtra</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">array</span><span class="o">);</span>
+    <span class="n">startActivity</span><span class="o">(</span><span class="n">localIntent</span><span class="o">);</span>
+</code></pre></div>
+<h5 id="5-访问不存在组件异常">5.访问不存在组件异常</h5>
+<div class="highlight"><pre><code class="language-text" data-lang="text">漏洞代码样例：
+</code></pre></div><div class="highlight"><pre><code class="language-java" data-lang="java">        <span class="n">Intent</span> <span class="n">notExist</span> <span class="o">=</span>  <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+        <span class="n">notExist</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="s">&quot;wechat&quot;</span><span class="o">,</span> <span class="s">&quot;share&quot;</span><span class="o">));</span>
+        <span class="n">startActivity</span><span class="o">(</span><span class="n">notExist</span><span class="o">);</span>
+</code></pre></div>
+<p>调用了第三方不存在的组件，没有做异常处理。</p>
+
+<p>测试代码：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="n">Intent</span> <span class="n">localIntent</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Intent</span><span class="o">();</span>
+    <span class="n">localIntent</span><span class="o">.</span><span class="na">setComponent</span><span class="o">(</span><span class="k">new</span> <span class="nf">ComponentName</span><span class="o">(</span><span class="n">packageName</span><span class="o">,</span> <span class="n">className</span><span class="o">));</span>
+    <span class="n">startActivity</span><span class="o">(</span><span class="n">localIntent</span><span class="o">);</span>
+</code></pre></div>
+<p>或者</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"> adb shell am start -n packageName/componentName
+</code></pre></div>
+<h4 id="解决方案">解决方案</h4>
+
+<p>1.在使用<code>Intent</code>获取<code>Extra</code>数据时增加异常处理，防止抛出异常引发崩溃</p>
+
+<p>2.在使用<code>getAction</code>时对返回值进行<code>null</code>检查后再使用</p>
+
+<p>3.在使用<code>Intent</code>获取<code>Array</code>、<code>List</code>类的的数据时，检查长度后再做操作</p>
+
+<p>4.在做强制类型转换时，加上<code>try catch</code>，防止有异常数据，导致强制转换抛出异常</p>
+
+<p>5.在调用自身的<code>Activity</code>时要确认已经在<code>Androidmanifest.xml</code>中声明，在调用其他<code>APP</code>的<code>activity</code>时要做冗错处理</p>
+
+<p>6.不必要的导出的组件设置为不导出,防止引起拒绝服务。在<code>AndroidMenifest.xml</code>文件中，将相应组件<code>android:exported</code>属性显示设置为<code>false</code>。</p>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1] <a href="http://developer.android.com/guide/components/index.html">http://developer.android.com/guide/components/index.html</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

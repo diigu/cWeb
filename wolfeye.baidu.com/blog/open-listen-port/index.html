@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>移动安全实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/theme.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../index.html">移动安全实验室</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active visible-xs-block"><a href="../links.html">Links</a></li>
+                <li class="active"><a href="../archive.html">Archive</a></li>
+                <li class="active"><a href="../about.html">About</a></li>
+                <li class="active"><a href="../feed.xml">RSS</a></li>
+                
+            </ul>
+          </div>
+    </div>
+</div>
+
+
+<div class="container container-middle">
+    <div class="row">
+        <div class="col-md-3 hidden-xs">
+            <div class="sidebar well">
+    <ul>
+        
+          <li><a href="index.html">本地端口开放越权风险</a></li>
+        
+          <li><a href="../webview-ignore-ssl-error/index.html">WebView组件忽略SSL证书验证错误漏洞</a></li>
+        
+          <li><a href="../content-provider-file-traversal/index.html">Content Provider目录遍历漏洞</a></li>
+        
+          <li><a href="../sql-injection/index.html">SQL注入漏洞</a></li>
+        
+          <li><a href="../webview-setsavepassword/index.html">WebView密码明文保存漏洞</a></li>
+        
+          <li><a href="../traversal-zip-file/index.html">ZIP文件解压目录遍历风险</a></li>
+        
+          <li><a href="../pendingintent-leak-information/index.html">PendingIntent包含隐式Intent风险</a></li>
+        
+          <li><a href="../secure-random/index.html">随机数使用不当漏洞</a></li>
+        
+          <li><a href="../clipboard-leak/index.html">剪贴板敏感信息泄露风险</a></li>
+        
+          <li><a href="../logcat-leak-sensitive-information/index.html">日志泄露隐私风险</a></li>
+        
+          <li><a href="../intent-data-leak/index.html">intent敏感数据泄露风险</a></li>
+        
+          <li><a href="../exec-code/index.html">运行其它可执行程序风险</a></li>
+        
+          <li><a href="../global-rw-of-sharepreference/index.html">SharedPreference全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-database/index.html">数据库全局读写漏洞</a></li>
+        
+          <li><a href="../global-rw-of-file/index.html">文件全局读写漏洞</a></li>
+        
+          <li><a href="../recieve-broadcast-security/index.html">动态注册广播组件暴露风险</a></li>
+        
+          <li><a href="../sendbroadcast-information-leak/index.html">发送广播信息泄漏风险</a></li>
+        
+          <li><a href="../dynamic-load-dex-file/index.html">动态加载DEX文件风险</a></li>
+        
+          <li><a href="../weak-encryption/index.html">弱加密风险</a></li>
+        
+          <li><a href="../java-ssl-middle-man/index.html">Java层ssl中间人攻击漏洞</a></li>
+        
+          <li><a href="../native-ssl-middle-man/index.html">SSL本地库中间人攻击漏洞</a></li>
+        
+          <li><a href="../local-dos/index.html">Android 本地拒绝服务漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2014-7224/index.html">WebView组件远程代码执行漏洞</a></li>
+        
+          <li><a href="../android-webview-cve-2012-6636/index.html">Android WebView 远程代码执行漏洞 CVE-2012-6636</a></li>
+        
+          <li><a href="../android-webview/index.html">WebView组件系统隐藏接口未移除漏洞</a></li>
+        
+          <li><a href="../intent-scheme-url/index.html">URL Scheme攻击漏洞</a></li>
+        
+          <li><a href="../android-fragment-injection/index.html">PreferenceActivity Fragment注入漏洞</a></li>
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="col-md-9">
+          <div class="article">
+            <div class="well">
+                <h1><a href="../index.html">本地端口开放越权风险</a></h1>
+            <div class="post-content">
+            <ul>
+<li>威胁等级：低</li>
+<li>影响版本：Android</li>
+</ul>
+
+<h4 id="漏洞描述">漏洞描述</h4>
+
+<p>Android应用通常使用PF_UNIX、PF_INET、PF_NETLINK等不同domain的<code>socket</code>来进行本地IPC或者远程网络通信，这些暴露的socket代表了潜在的本地或远程攻击面，历史上也出现过不少利用socket进行拒绝服务、root提权或者远程命令执行的案例。特别是PF_INET类型的网络socket，可以通过网络与Android应用通信，其原本用于linux环境下开放网络服务，由于缺乏对网络调用者身份或者本地调用者<code>id、permission</code>等细粒度的安全检查机制，在实现不当的情况下，可以突破Android的沙箱限制，以被攻击应用的权限执行命令，通常出现比较严重的漏洞[<a href="http://drops.wooyun.org/mobile/6973">1</a>][<a href="http://blog.trendmicro.com/trendlabs-security-intelligence/open-socket-poses-risks-to-android-security-model/">2</a>]</p>
+
+<h4 id="测试方法">测试方法</h4>
+
+<p>使用<code>ServerSocket</code>创建一个TCP Socket Server，风险代码样例：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="o">...</span>
+    <span class="n">serverSocket</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">ServerSocket</span><span class="o">(</span><span class="n">SERVER_PORT</span><span class="o">);</span>
+    <span class="kt">boolean</span> <span class="n">mainThreadFlag</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span><span class="n">mainThreadFlag</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Socket</span> <span class="n">client</span> <span class="o">=</span> <span class="n">serverSocket</span><span class="o">.</span><span class="na">accept</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e1</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+</code></pre></div>
+<p>然后对收到的数据进行处理，风险代码片段：</p>
+<div class="highlight"><pre><code class="language-java" data-lang="java">    <span class="o">...</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">readCMDFromSocket</span><span class="o">(</span><span class="n">InputStream</span> <span class="n">in</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">MAX_BUFFER_BYTES</span> <span class="o">=</span> <span class="mi">2048</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="o">;</span>
+        <span class="kt">byte</span><span class="o">[]</span> <span class="n">tempbuffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">MAX_BUFFER_BYTES</span><span class="o">];</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">numReadedBytes</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">tempbuffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tempbuffer</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+            <span class="k">if</span><span class="o">(</span> <span class="n">numReadedBytes</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">)</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">String</span><span class="o">(</span><span class="n">tempbuffer</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">numReadedBytes</span><span class="o">,</span> <span class="s">&quot;utf-8&quot;</span><span class="o">);</span>
+            <span class="n">tempbuffer</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">msg</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">handlemsg</span><span class="o">()</span>
+    <span class="o">{</span>
+      <span class="o">...</span>
+      <span class="n">msg</span> <span class="o">=</span> <span class="n">readCMDFromSocket</span><span class="o">(</span><span class="n">in</span><span class="o">)</span>
+      <span class="k">if</span> <span class="o">(</span><span class="s">&quot;exec&quot;</span> <span class="o">==</span> <span class="n">msg</span><span class="o">)</span>
+      <span class="o">{</span>
+        <span class="o">...</span>
+           <span class="c1">//execute command without any check</span>
+        <span class="o">...</span>
+      <span class="o">}</span>
+      <span class="o">...</span>
+    <span class="o">}</span>
+</code></pre></div>
+<p>如上代码中，对收到内容格式化取出命令，没有对收到的socket和内容做任何校验检查，会绕过android各种安全机制以被攻击的应用的权限执行。某些情况下会直接导致远程命令任意执行，同理使用UDP通信使用上述逻辑的代码也会存在类似问题。</p>
+
+<h4 id="解决方案">解决方案</h4>
+
+<p>直接传递命令字或者间接处理有敏感信息或操作时，避免使用<code>socket</code>实现，使用能够控制权限校验身份的方式通讯</p>
+
+<h4 id="参考资料">参考资料</h4>
+
+<p>[1] <a href="http://drops.wooyun.org/mobile/6973">http://drops.wooyun.org/mobile/6973</a></p>
+
+<p>[2] <a href="http://blog.trendmicro.com/trendlabs-security-intelligence/open-socket-poses-risks-to-android-security-model/">http://blog.trendmicro.com/trendlabs-security-intelligence/open-socket-poses-risks-to-android-security-model/</a></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12 footer navbar-inverse navbar-fixed-bottom">
+            <p class="copyright">&copy;2015 移动安全实验室. Powered by <a href="https://www.baidu.com">Baidu Inc</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
