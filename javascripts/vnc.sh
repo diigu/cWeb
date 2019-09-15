@@ -10,7 +10,8 @@ fi
 SSPASSWORD=`pwgen 15 1`
 VNCPASSWORD=`pwgen 8 1`
 HTTPPASSWORD=`pwgen 8 1`
-RANDOMPORT=$[ $RANDOM % 1000 + 6000 ]
+RANDOMPORT=6115
+#RANDOMPORT=$[ $RANDOM % 1000 + 6000 ]
 MYIP=`curl ifconfig.me`
 LOCALIP=`ifconfig eth0|grep broad|awk '{print $2}'`
 
