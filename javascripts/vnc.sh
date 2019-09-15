@@ -12,6 +12,7 @@ VNCPASSWORD=`pwgen 8 1`
 HTTPPASSWORD=`pwgen 8 1`
 RANDOMPORT=$[ $RANDOM % 1000 + 6000 ]
 MYIP=`curl ifconfig.me`
+LOCALIP=`ifconfig eth0|grep broad|awk '{print $2}'`
 
 if [ -f "/usr/bin/docker" ]; then
     echo "Docker installed, starting VNC..."
@@ -30,7 +31,7 @@ else
 fi
 
 
-sudo docker run -p 0.0.0.0:$RANDOMPORT:443 -e SSL_PORT=443 -e VNC_PASSWORD=$VNCPASSWORD -e HTTP_PASSWORD=$HTTPPASSWORD -v /tmp/ssl:/etc/nginx/ssl -v /dev/shm:/dev/shm dorowu/ubuntu-desktop-lxde-vnc  > /dev/null 2>&1 &
+sudo docker run -p $LOCALIP:$RANDOMPORT:443 -e SSL_PORT=443 -e VNC_PASSWORD=$VNCPASSWORD -e HTTP_PASSWORD=$HTTPPASSWORD -v /tmp/ssl:/etc/nginx/ssl -v /dev/shm:/dev/shm dorowu/ubuntu-desktop-lxde-vnc  > /dev/null 2>&1 &
 
 echo 'HTTP IP https://'$MYIP":$RANDOMPORT/"
 
